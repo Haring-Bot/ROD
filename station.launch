@@ -1,0 +1,26 @@
+<launch>
+  <!-- Load robot descriptions -->
+  <param name="robot_description_handling" command="$(find xacro)/xacro '$(find handling_robot)/urdf/handling_robot.xacro'" />
+  <param name="robot_description_polishing" command="$(find xacro)/xacro '$(find polishing_robot)/urdf/polishing_robot.xacro'" />
+  <param name="robot_description_scara" command="$(find xacro)/xacro '$(find scara)/urdf/scara.xacro'" />
+
+  <!-- Start Gazebo with empty world or a custom world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+  </include>
+
+  <!-- Spawn Handling Robot -->
+  <node name="spawn_handling_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-param robot_description_handling -urdf -model handling_robot -x -1.0 -y -1.0 -z 0" />
+
+  <!-- Spawn Polishing Robot -->
+  <node name="spawn_polishing_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-param robot_description_polishing -urdf -model polishing_robot -x 1.0 -y 1.0 -z 0" />
+
+  <!-- Spawn SCARA Robot -->
+  <node name="spawn_scara_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-param robot_description_scara -urdf -model scara_robot -x 2.0 -y 2.0 -z 0" />
+</launch>

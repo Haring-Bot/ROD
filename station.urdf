@@ -1,0 +1,28 @@
+<robot name="station" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Base world link -->
+  <link name="world"/>
+
+  <!-- Include robot 1 -->
+  <xacro:include filename="$(find handling_robot)/urdf/handling_robot.xacro"/>
+  <xacro:handling_robot prefix="handling_"/>
+
+  <!-- Fixed joint to place robot 1 -->
+  <joint name="world_to_handling_base" type="fixed">
+    <parent link="world"/>
+    <child link="handling_base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Include robot 2 -->
+  <xacro:include filename="$(find polishing_robot)/urdf/polishing_robot.xacro"/>
+  <xacro:polishing_robot prefix="polishing_"/>
+
+  <!-- Fixed joint to place robot 2 -->
+  <joint name="world_to_polishing_base" type="fixed">
+    <parent link="world"/>
+    <child link="polishing_base_link"/>
+    <origin xyz="1 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
