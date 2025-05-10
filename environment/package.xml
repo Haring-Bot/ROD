@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>environment</name>  <!-- 🔁 Must match the folder name -->
+  <version>0.0.1</version>
+  <description>Static objects like the machine model used in Gazebo.</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <!-- These are common dependencies -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>xacro</build_depend>
+  <build_depend>urdf</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>urdf</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+
+  <export>
+  </export>
+</package>

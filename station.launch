@@ -12,6 +12,11 @@
     <arg name="headless" value="false"/>
   </include>
 
+ <!-- Spawn machine -->
+ <node name="spawn_machine" pkg="gazebo_ros" type="spawn_model"
+      args="-urdf -model machine -file $(find environment)/machine.xacro"
+      output="screen"/>
+      
   <!-- Spawn Handling Robot -->
   <node name="spawn_handling_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
         args="-param robot_description_handling -urdf -model handling_robot -x -1.0 -y -1.0 -z 0" />
