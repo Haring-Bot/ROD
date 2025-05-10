@@ -23,7 +23,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/base.STL" />
+          filename="package://scara/meshes/base.STL" />
       </geometry>
       <material
         name="">
@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/base.STL" />
+          filename="package://scara/meshes/base.STL" />
       </geometry>
     </collision>
   </link>
@@ -62,7 +62,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M1.STL" />
+          filename="package://scara/meshes/M1.STL" />
       </geometry>
       <material
         name="">
@@ -76,7 +76,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M1.STL" />
+          filename="package://scara/meshes/M1.STL" />
       </geometry>
     </collision>
   </link>
@@ -111,7 +111,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M2.STL" />
+          filename="package://scara/meshes/M2.STL" />
       </geometry>
       <material
         name="">
@@ -125,7 +125,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M2.STL" />
+          filename="package://scara/meshes/M2.STL" />
       </geometry>
     </collision>
   </link>
@@ -165,7 +165,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M3.STL" />
+          filename="package://scara/meshes/M3.STL" />
       </geometry>
       <material
         name="">
@@ -179,7 +179,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M3.STL" />
+          filename="package://scara/meshes/M3.STL" />
       </geometry>
     </collision>
   </link>
@@ -219,7 +219,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M4R.STL" />
+          filename="package://scara/meshes/M4R.STL" />
       </geometry>
       <material
         name="">
@@ -233,7 +233,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M4R.STL" />
+          filename="package://scara/meshes/M4R.STL" />
       </geometry>
     </collision>
   </link>
@@ -268,7 +268,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M4L.STL" />
+          filename="package://scara/meshes/M4L.STL" />
       </geometry>
       <material
         name="">
@@ -282,7 +282,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_urdf/meshes/M4L.STL" />
+          filename="package://scara/meshes/M4L.STL" />
       </geometry>
     </collision>
   </link>
