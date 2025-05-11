@@ -3,6 +3,7 @@
   <param name="robot_description_handling" command="$(find xacro)/xacro '$(find handling_robot)/urdf/handling_robot.xacro'" />
   <param name="robot_description_polishing" command="$(find xacro)/xacro '$(find polishing_robot)/urdf/polishing_robot.xacro'" />
   <param name="robot_description_scara" command="$(find xacro)/xacro '$(find scara)/urdf/scara.xacro'" />
+  <param name="robot_description_machine" command="$(find xacro)/xacro '$(find environment)/machine.xacro'" />
 
   <!-- Start Gazebo with empty world or a custom world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -13,19 +14,23 @@
   </include>
 
  <!-- Spawn machine -->
- <node name="spawn_machine" pkg="gazebo_ros" type="spawn_model"
-      args="-urdf -model machine -file $(find environment)/machine.xacro"
+   <node name="spawn_machine" pkg="gazebo_ros" type="spawn_model"
+      args="-urdf -model machine -param robot_description_machine -x 0 -y 1.2 -z 0 -R 0.575 -P 0 -Y 0"
       output="screen"/>
-      
+  
   <!-- Spawn Handling Robot -->
   <node name="spawn_handling_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
-        args="-param robot_description_handling -urdf -model handling_robot -x -1.0 -y -1.0 -z 0" />
+        args="-param robot_description_handling -urdf -model handling_robot -x 0.96 -y 0.9 -z 0.21" />
 
-  <!-- Spawn Polishing Robot -->
+<!-- Spawn Polishing Robot -->
   <node name="spawn_polishing_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
-        args="-param robot_description_polishing -urdf -model polishing_robot -x 1.0 -y 1.0 -z 0" />
+        args="-param robot_description_polishing -urdf -model polishing_robot -x -1.0 -y -1.0 -z 0" />
+      
+
+  
 
   <!-- Spawn SCARA Robot -->
   <node name="spawn_scara_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
-        args="-param robot_description_scara -urdf -model scara_robot -x 2.0 -y 2.0 -z 0" />
+        args="-param robot_description_scara -urdf -model scara_robot -x 0.8 -y 0.2 -z 1 -R 0.3 -P 0 -Y 0" />
+
 </launch>

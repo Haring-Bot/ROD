@@ -2,9 +2,9 @@
   <link name="base_link"/>
   <link name="machine_link">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="1 0 0"/>
       <geometry>
-        <mesh filename="$(find environment)/meshes/machine.stl" scale="10 10 10"/>
+        <mesh filename="$(find environment)/meshes/machine.stl" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -24,6 +24,6 @@
   <joint name="machine_fixed_joint" type="fixed">
     <parent link="base_link"/>
     <child link="machine_link"/>
-    <origin xyz="1 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 </robot>
