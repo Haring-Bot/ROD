@@ -15,17 +15,31 @@
     <!-- Polisher -->
     <arg name="polisher_x" value="0.6"/>
     <arg name="polisher_y" value="0.6"/>
-    <arg name="polisher_z" value="2.050"/>
+    <arg name="polisher_z" value="2.04"/> <!--2.050-->
     <arg name="polisher_roll" value="3.14"/>
     <arg name="polisher_pitch" value="0.0"/>
     <arg name="polisher_yaw" value="0.0"/>
     <param name="robot_description" textfile="$(find polisher)/urdf/polisher.urdf"/>
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model polisher -x $(arg polisher_x) -y $(arg polisher_y) -z $(arg polisher_z) -R $(arg polisher_roll) -P $(arg polisher_pitch) -Y $(arg polisher_yaw)"/>
+    <node name="spawn_urdf_polisher" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model polisher -x $(arg polisher_x) -y $(arg polisher_y) -z $(arg polisher_z) -R $(arg polisher_roll) -P $(arg polisher_pitch) -Y $(arg polisher_yaw)"/>
 
     <!-- Polisher Controller -->
     <rosparam file="$(find polisher_moveit)/config/ros_controllers.yaml" command="load"/>    
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="polisherController" ns="polisher"/>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
-   
+    <node name="robot_state_publisher_handler" pkg="robot_state_publisher" type="robot_state_publisher" ns="handler"/>
+
+<!--     
+    <arg name="handler_x" value="0.6"/>
+    <arg name="handler_y" value="0.6"/>
+    <arg name="handler_z" value="2.050"/>
+    <arg name="handler_roll" value="3.14"/>
+    <arg name="handler_pitch" value="0.0"/>
+    <arg name="handler_yaw" value="0.0"/>
+    <param name="robot_description" textfile="$(find handler)/urdf/handler.urdf"/>
+    <node name="spawn_urdf_handler" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model handler -x $(arg handler_x) -y $(arg handler_y) -z $(arg handler_z) -R $(arg handler_roll) -P $(arg handler_pitch) -Y $(arg handler_yaw)"/>
+
+    
+    <rosparam file="$(find handler_moveit)/config/ros_controllers.yaml" command="load"/>    
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="handlerController" ns="handler"/>
+    -->
 
 </launch>
