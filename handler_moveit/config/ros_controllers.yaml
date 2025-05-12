@@ -1,4 +1,8 @@
-controller:
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+handler/handlerController:
   type: position_controllers/JointTrajectoryController
   joints:
     - J1
