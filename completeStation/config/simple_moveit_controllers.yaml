@@ -1,0 +1,33 @@
+controller_list:
+  - name: scara_trajectory_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - scara_J1
+      - scara_J2
+      - scara_J3
+      - scara_J4
+
+  - name: handler_trajectory_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - handler_J1
+      - handler_J2
+      - handler_J3
+      - handler_J4
+      - handler_J5
+      - handler_J6
+
+  - name: polisher_trajectory_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - polisher_J1
+      - polisher_J2
+      - polisher_J3
+      - polisher_J4
+      - polisher_J5

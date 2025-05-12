@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: polishing_station
+    relative_path: description/machine_robots.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/station_robots.srdf
+  CONFIG:
+    author_name: Julian Haring
+    author_email: re23m009@technikum-wien.at
+    generated_timestamp: 1747082755

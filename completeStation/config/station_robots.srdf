@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="station_robots">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="scara_planner">
+        <link name="scara_base_link"/>
+        <link name="scara_L1"/>
+        <link name="scara_L2"/>
+        <link name="scara_L3"/>
+        <link name="scara_L4"/>
+        <joint name="scara_J1"/>
+        <joint name="scara_J2"/>
+        <joint name="scara_J3"/>
+        <joint name="scara_J4"/>
+        <chain base_link="scara_base_link" tip_link="scara_L4"/>
+    </group>
+    <group name="handler_planner">
+        <link name="handler_base_link"/>
+        <link name="handler_L1"/>
+        <link name="handler_L2"/>
+        <link name="handler_L3"/>
+        <link name="handler_L4"/>
+        <link name="handler_L5"/>
+        <link name="handler_L6"/>
+        <joint name="handler_J1"/>
+        <joint name="handler_J2"/>
+        <joint name="handler_J3"/>
+        <joint name="handler_J4"/>
+        <joint name="handler_J5"/>
+        <joint name="handler_J6"/>
+        <chain base_link="handler_base_link" tip_link="handler_L6"/>
+    </group>
+    <group name="polisher_planner">
+        <link name="polisher_base_link"/>
+        <link name="polisher_L1"/>
+        <link name="polisher_L2"/>
+        <link name="polisher_L3"/>
+        <link name="polisher_L4"/>
+        <link name="polisher_L5"/>
+        <joint name="polisher_J1"/>
+        <joint name="polisher_J2"/>
+        <joint name="polisher_J3"/>
+        <joint name="polisher_J4"/>
+        <joint name="polisher_J5"/>
+        <chain base_link="polisher_base_link" tip_link="polisher_L5"/>
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home" group="scara_planner">
+        <joint name="scara_J1" value="0"/>
+        <joint name="scara_J2" value="0"/>
+        <joint name="scara_J3" value="0"/>
+        <joint name="scara_J4" value="0"/>
+    </group_state>
+    <group_state name="home" group="handler_planner">
+        <joint name="handler_J1" value="0"/>
+        <joint name="handler_J2" value="0"/>
+        <joint name="handler_J3" value="0"/>
+        <joint name="handler_J4" value="0"/>
+        <joint name="handler_J5" value="0"/>
+        <joint name="handler_J6" value="0"/>
+    </group_state>
+    <group_state name="home" group="polisher_planner">
+        <joint name="polisher_J1" value="0"/>
+        <joint name="polisher_J2" value="0"/>
+        <joint name="polisher_J3" value="0"/>
+        <joint name="polisher_J4" value="0"/>
+        <joint name="polisher_J5" value="0"/>
+    </group_state>
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="handler_L1" link2="handler_L2" reason="Adjacent"/>
+    <disable_collisions link1="handler_L1" link2="handler_L4" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="handler_base_link" reason="Adjacent"/>
+    <disable_collisions link1="handler_L1" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="polisher_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L1" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="handler_L3" reason="Adjacent"/>
+    <disable_collisions link1="handler_L2" link2="handler_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="polisher_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L2" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="handler_L4" reason="Adjacent"/>
+    <disable_collisions link1="handler_L3" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="polisher_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_L3" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="handler_L5" reason="Adjacent"/>
+    <disable_collisions link1="handler_L4" link2="handler_L6" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="handler_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="polisher_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_L4" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="handler_L6" reason="Adjacent"/>
+    <disable_collisions link1="handler_L5" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="polisher_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_L5" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="polisher_base_link" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_L6" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="polisher_L1" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="polisher_L2" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="polisher_L3" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="polisher_L4" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="polisher_L5" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="polisher_base_link" reason="Adjacent"/>
+    <disable_collisions link1="handler_base_link" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="handler_base_link" link2="scara_base_link" reason="Adjacent"/>
+    <disable_collisions link1="handler_base_link" link2="static_frame" reason="Adjacent"/>
+    <disable_collisions link1="polisher_L1" link2="polisher_L2" reason="Adjacent"/>
+    <disable_collisions link1="polisher_L1" link2="polisher_base_link" reason="Adjacent"/>
+    <disable_collisions link1="polisher_L1" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="polisher_L1" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="polisher_L1" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="polisher_L1" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="polisher_L1" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="polisher_L1" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="polisher_L2" link2="polisher_L3" reason="Adjacent"/>
+    <disable_collisions link1="polisher_L2" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="polisher_L2" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="polisher_L2" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="polisher_L2" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="polisher_L2" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="polisher_L2" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="polisher_L3" link2="polisher_L4" reason="Adjacent"/>
+    <disable_collisions link1="polisher_L3" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="polisher_L3" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="polisher_L3" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="polisher_L3" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="polisher_L3" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="polisher_L3" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="polisher_L4" link2="polisher_L5" reason="Adjacent"/>
+    <disable_collisions link1="polisher_L4" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="polisher_L4" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="polisher_L4" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="polisher_L4" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="polisher_L4" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="polisher_L4" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="polisher_L5" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="polisher_L5" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="polisher_L5" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="polisher_L5" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="polisher_L5" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="polisher_L5" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="polisher_base_link" link2="scara_L1" reason="Never"/>
+    <disable_collisions link1="polisher_base_link" link2="scara_L2" reason="Never"/>
+    <disable_collisions link1="polisher_base_link" link2="scara_L3" reason="Never"/>
+    <disable_collisions link1="polisher_base_link" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="polisher_base_link" link2="scara_base_link" reason="Adjacent"/>
+    <disable_collisions link1="polisher_base_link" link2="static_frame" reason="Adjacent"/>
+    <disable_collisions link1="scara_L1" link2="scara_L2" reason="Adjacent"/>
+    <disable_collisions link1="scara_L1" link2="scara_base_link" reason="Adjacent"/>
+    <disable_collisions link1="scara_L1" link2="static_frame" reason="Never"/>
+    <disable_collisions link1="scara_L2" link2="scara_L3" reason="Adjacent"/>
+    <disable_collisions link1="scara_L2" link2="scara_L4" reason="Never"/>
+    <disable_collisions link1="scara_L2" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="scara_L3" link2="scara_L4" reason="Adjacent"/>
+    <disable_collisions link1="scara_L3" link2="scara_base_link" reason="Never"/>
+    <disable_collisions link1="scara_base_link" link2="static_frame" reason="Adjacent"/>
+</robot>

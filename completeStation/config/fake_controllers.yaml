@@ -1,0 +1,32 @@
+controller_list:
+  - name: fake_scara_planner_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - scara_J1
+      - scara_J2
+      - scara_J3
+      - scara_J4
+  - name: fake_handler_planner_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - handler_J1
+      - handler_J2
+      - handler_J3
+      - handler_J4
+      - handler_J5
+      - handler_J6
+  - name: fake_polisher_planner_controller
+    type: $(arg fake_execution_type)
+    joints:
+      - polisher_J1
+      - polisher_J2
+      - polisher_J3
+      - polisher_J4
+      - polisher_J5
+initial:  # Define initial robot poses per group
+  - group: scara_planner
+    pose: home
+  - group: handler_planner
+    pose: home
+  - group: polisher_planner
+    pose: home
