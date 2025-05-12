@@ -1,7 +1,10 @@
 <launch>
     <!-- Empty World-->
     <include file="$(find gazebo_ros)/launch/empty_world.launch" />
- 
+    
+    <!-- Manual Trajectory Controller-->
+    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" output="screen"/>
+
     <!-- Station -->
     <include file="$(find station)/launch/spawnStation.launch">
         <arg name="x" value="0.0"/>   <!-- Set custom position if needed -->
