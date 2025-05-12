@@ -1,42 +1,48 @@
 <launch>
-    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
-    
-    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" output="screen"/>
+  <!-- Declare args globally -->
+  <arg name="x_polisher" default="0.6"/>
+  <arg name="y_polisher" default="0.6"/>
+  <arg name="z_polisher" default="2.04"/>
+  <arg name="roll_polisher" default="3.14"/>
+  <arg name="pitch_polisher" default="0.0"/>
+  <arg name="yaw_polisher" default="0.0"/>
 
-    <node name="robot_state_publisher_handler" pkg="robot_state_publisher" type="robot_state_publisher" ns="publisher"/>
-    <node name="robot_state_publisher_handler" pkg="robot_state_publisher" type="robot_state_publisher" ns="handler"/>
+  <arg name="x_handler" default="-2.0"/>
+  <arg name="y_handler" default="-2.0"/>
+  <arg name="z_handler" default="0.1"/>
+  <arg name="roll_handler" default="0.0"/>
+  <arg name="pitch_handler" default="0.0"/>
+  <arg name="yaw_handler" default="0.0"/>
 
-    <include file="$(find station)/launch/spawnStation.launch">
-        <arg name="x" value="0.0"/> 
-        <arg name="y" value="1.2"/>
-        <arg name="z" value="0.1"/>
-    </include>
+  <!-- Your world and UI -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
 
-    <arg name="polisher_x" value="0.6"/>
-    <arg name="polisher_y" value="0.6"/>
-    <arg name="polisher_z" value="2.04"/> 
-    <arg name="polisher_roll" value="3.14"/>
-    <arg name="polisher_pitch" value="0.0"/>
-    <arg name="polisher_yaw" value="0.0"/>
-    <param name="robot_description" textfile="$(find polisher)/urdf/polisher.urdf"/>
-    <node name="spawn_urdf_polisher" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model polisher -x $(arg polisher_x) -y $(arg polisher_y) -z $(arg polisher_z) -R $(arg polisher_roll) -P $(arg polisher_pitch) -Y $(arg polisher_yaw)"/>
+  <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" output="screen"/>
 
-    <rosparam file="$(find polisher_moveit)/config/ros_controllers.yaml" command="load"/>    
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="polisherController" ns="polisher"/>
+  <!-- Your station -->
+  <include file="$(find station)/launch/spawnStation.launch">
+    <arg name="x" value="0.0"/> 
+    <arg name="y" value="1.2"/>
+    <arg name="z" value="0.1"/>
+  </include>
 
-    
-    <arg name="handler_x" value="-2.0"/>
-    <arg name="handler_y" value="-2.0"/>
-    <arg name="handler_z" value="0.1"/>
-    <arg name="handler_roll" value="0.0"/>
-    <arg name="handler_pitch" value="0.0"/>
-    <arg name="handler_yaw" value="0.0"/>
-    <param name="robot_description" textfile="$(find handler)/urdf/handler.urdf"/>
-    <node name="spawn_urdf_handler" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model handler -x $(arg handler_x) -y $(arg handler_y) -z $(arg handler_z) -R $(arg handler_roll) -P $(arg handler_pitch) -Y $(arg handler_yaw)"/>
+  <!-- Polisher group -->
+  <group ns="polisher">
+    <param name="robot_description" textfile="$(find polisher)/urdf/polisher.urdf" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="spawn_urdf_polisher" pkg="gazebo_ros" type="spawn_model"
+          args="-param robot_description -urdf -model polisher -x $(arg x_polisher) -y $(arg y_polisher) -z $(arg z_polisher) -R $(arg roll_polisher) -P $(arg pitch_polisher) -Y $(arg yaw_polisher)"/>
+    <rosparam file="$(find polisher_moveit)/config/ros_controllers.yaml" command="load"/>  
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="polisherController"/>
+  </group>
 
-    
-    <rosparam file="$(find handler_moveit)/config/ros_controllers.yaml" command="load"/>    
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="handlerController" ns="handler"/>
-   
-
+  <!-- Handler group -->
+  <group ns="handler">
+    <param name="robot_description" textfile="$(find handler)/urdf/handler.urdf" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="spawn_urdf_handler" pkg="gazebo_ros" type="spawn_model"
+          args="-param robot_description -urdf -model handler -x $(arg x_handler) -y $(arg y_handler) -z $(arg z_handler) -R $(arg roll_handler) -P $(arg pitch_handler) -Y $(arg yaw_handler)"/>
+    <rosparam file="$(find handler_moveit)/config/ros_controllers.yaml" command="load"/>  
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="handlerController"/>
+  </group>
 </launch>

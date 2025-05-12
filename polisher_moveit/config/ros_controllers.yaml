@@ -2,7 +2,7 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 
-polisher/polisherController:
+polisherController:
   type: position_controllers/JointTrajectoryController
   joints:
     - J1
