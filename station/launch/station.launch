@@ -10,11 +10,14 @@
     </include>
 
     <!-- Polisher -->
-    <arg name="polisher_x" value="2.0"/>
-    <arg name="polisher_y" value="2.0"/>
-    <arg name="polisher_z" value="0.1"/>
+    <arg name="polisher_x" value="0.6"/>
+    <arg name="polisher_y" value="0.6"/>
+    <arg name="polisher_z" value="2.050"/>
+    <arg name="polisher_roll" value="3.14"/>
+    <arg name="polisher_pitch" value="0.0"/>
+    <arg name="polisher_yaw" value="0.0"/>
     <param name="robot_description" textfile="$(find polisher)/urdf/polisher.urdf"/>
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model polisher -x $(arg polisher_x) -y $(arg polisher_y) -z $(arg polisher_z)"/>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model polisher -x $(arg polisher_x) -y $(arg polisher_y) -z $(arg polisher_z) -R $(arg polisher_roll) -P $(arg polisher_pitch) -Y $(arg polisher_yaw)"/>
 
     <!-- Polisher Controller -->
     <rosparam file="$(find polisher_moveit)/config/ros_controllers.yaml" command="load"/>    
