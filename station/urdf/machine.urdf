@@ -1,0 +1,24 @@
+<robot name="machine">
+  <link name="machine_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://station/meshes/machine.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://station/meshes/machine.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0"
+               iyy="0.01" iyz="0.0"
+               izz="0.01"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="machine_link">
+    <static>true</static>
+  </gazebo>
+</robot>

@@ -1,0 +1,25 @@
+<launch>
+    <!-- Empty World-->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+ 
+    <!-- Station -->
+    <include file="$(find station)/launch/spawnStation.launch">
+        <arg name="x" value="0.0"/>   <!-- Set custom position if needed -->
+        <arg name="y" value="1.2"/>
+        <arg name="z" value="0.1"/>
+    </include>
+
+    <!-- Polisher -->
+    <arg name="polisher_x" value="2.0"/>
+    <arg name="polisher_y" value="2.0"/>
+    <arg name="polisher_z" value="0.1"/>
+    <param name="robot_description" textfile="$(find polisher)/urdf/polisher.urdf"/>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model polisher -x $(arg polisher_x) -y $(arg polisher_y) -z $(arg polisher_z)"/>
+
+    <!-- Polisher Controller -->
+    <rosparam file="$(find polisher_moveit)/config/ros_controllers.yaml" command="load"/>    
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="polisherController" ns="polisher"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+   
+
+</launch>
