@@ -11,7 +11,7 @@
     <joint name="base_to_world" type="fixed">
         <parent link="world" />
         <child link="base_link" />
-        <origin rpy="0 0 0" xyz="0 0 0.01" />
+        <origin rpy="0 0 0" xyz="0 0 1" />
     </joint>
     <link name="base_link">
         <inertial>
@@ -26,7 +26,7 @@
         <origin rpy="1.57 0 0" xyz="0 1.2 0" />
     </joint>
     <joint name="scara_base_to_base_link" type="fixed">
-        <origin rpy="0 0 0" xyz="0.6 0.14 0.67" />
+        <origin rpy="0 0 0" xyz="0.6 0.14 0.75" /> 
         <parent link="base_link" />
         <child link="scara_base_link" />
     </joint>
@@ -729,22 +729,7 @@
     </gazebo>
     <gazebo>
         <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-            <jointName>scara_J1</jointName>
-            <jointName>scara_J2</jointName>
-            <jointName>scara_J3</jointName>
-            <jointName>scara_J4</jointName>
-            <jointName>handler_J1</jointName>
-            <jointName>handler_J2</jointName>
-            <jointName>handler_J3</jointName>
-            <jointName>handler_J4</jointName>
-            <jointName>handler_J5</jointName>
-            <jointName>handler_J6</jointName>
-            <jointName>polisher_J1</jointName>
-            <jointName>polisher_J2</jointName>
-            <jointName>polisher_J3</jointName>
-            <jointName>polisher_J4</jointName>
-            <jointName>polisher_J5</jointName>
-        </plugin>
+        <jointName>scara_J1, scara_J2, scara_J3, scara_J4, handler_J1, handler_J2, handler_J3, handler_J4, handler_J5, handler_J6, polisher_J1, polisher_J2, polisher_J3, polisher_J4, polisher_J5</jointName>        </plugin>
     </gazebo>
 </robot>
 

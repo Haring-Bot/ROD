@@ -15,6 +15,11 @@ scara_trajectory_controller:
   stop_trajectory_duration: 0.5
   state_publish_rate: 25
   action_monitor_rate: 10
+  gains:
+    scara_J1: {p: 100.0, i: 0.01, d: 10.0}
+    scara_J2: {p: 100.0, i: 0.01, d: 10.0}
+    scara_J3: {p: 100.0, i: 0.01, d: 10.0}
+    scara_J4: {p: 100.0, i: 0.01, d: 10.0}
   
 
 handler_trajectory_controller:
@@ -38,6 +43,13 @@ handler_trajectory_controller:
   stop_trajectory_duration: 0.5
   state_publish_rate: 25
   action_monitor_rate: 10
+  gains:
+    handler_J1: {p: 100.0, i: 0.01, d: 10.0}
+    handler_J2: {p: 100.0, i: 0.01, d: 10.0}
+    handler_J3: {p: 100.0, i: 0.01, d: 10.0}
+    handler_J4: {p: 100.0, i: 0.01, d: 10.0}
+    handler_J5: {p: 100.0, i: 0.01, d: 10.0}
+    handler_J6: {p: 100.0, i: 0.01, d: 10.0}
 
 
 polisher_trajectory_controller:
@@ -59,3 +71,9 @@ polisher_trajectory_controller:
   stop_trajectory_duration: 0.5
   state_publish_rate: 25
   action_monitor_rate: 10
+  gains:
+    polisher_J1: {p: 100.0, i: 0.01, d: 10.0}
+    polisher_J2: {p: 100.0, i: 0.01, d: 10.0}
+    polisher_J3: {p: 100.0, i: 0.01, d: 10.0}
+    polisher_J4: {p: 100.0, i: 0.01, d: 10.0}
+    polisher_J5: {p: 100.0, i: 0.01, d: 10.0}
