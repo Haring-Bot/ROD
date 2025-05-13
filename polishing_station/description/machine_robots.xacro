@@ -7,6 +7,12 @@
   
 <link name="base_link"/>
 
+<joint name="frame_to_base_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="static_frame"/>
+    <origin xyz="0 1.2 0" rpy="1.57 0 0"/>
+</joint>
+
 <joint name="scara_base_to_base_link" type="fixed">
     <origin xyz="3 0 0" rpy="0 0 0"/>
     <parent link="base_link"/>
@@ -14,7 +20,7 @@
 </joint>
 
 <joint name="handler_base_to_base_link" type="fixed">
-    <origin xyz="0 3 0" rpy="0 0 0"/> <!-- adjust xyz if needed -->
+    <origin xyz="0.963 0.27 0.9" rpy="0 0 0"/> <!-- adjust xyz if needed -->
     <parent link="base_link"/>
     <child link="handler_base_link"/>
 </joint>
@@ -25,11 +31,7 @@
     <child link="polisher_base_link"/>
 </joint>
 
-<joint name="frame_to_base_link" type="fixed">
-    <parent link="base_link"/>
-    <child link="static_frame"/>
-    <origin xyz="0 0 0" rpy="1.57 0 0"/>
-</joint>
+
 
 
 
@@ -435,10 +437,10 @@
     <axis
       xyz="0 1 0" />
     <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
     <dynamics
       damping="1"
       friction="1" />
@@ -496,10 +498,10 @@
     <axis
       xyz="1 0 0" />
     <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
     <dynamics
       damping="1"
       friction="1" />
@@ -557,10 +559,10 @@
     <axis
       xyz="1 0 0" />
     <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
     <dynamics
       damping="1"
       friction="1" />
@@ -618,10 +620,10 @@
     <axis
       xyz="1 0 0" />
     <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
     <dynamics
       damping="1"
       friction="1" />
@@ -679,10 +681,10 @@
     <axis
       xyz="0 0 1" />
     <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
     <dynamics
       damping="1"
       friction="1" />
@@ -740,10 +742,10 @@
     <axis
       xyz="0 1 0" />
     <limit
-      lower="0"
-      upper="0"
-      effort="0"
-      velocity="0" />
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
     <dynamics
       damping="1"
       friction="1" />

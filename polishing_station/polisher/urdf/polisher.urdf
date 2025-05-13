@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="polisher">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="1.1824E-34 0.0020988 -8.1451E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.50894" />
+      <inertia
+        ixx="0.001056"
+        ixy="-2.9324E-36"
+        ixz="7.2641E-36"
+        iyy="0.0020612"
+        iyz="2.0746E-20"
+        izz="0.001056" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="L1">
+    <inertial>
+      <origin
+        xyz="2.609E-07 0.069404 3.3533E-08"
+        rpy="0 0 0" />
+      <mass
+        value="2.6203" />
+      <inertia
+        ixx="0.01468"
+        ixy="-4.4372E-08"
+        ixz="-6.9928E-10"
+        iyy="0.011798"
+        iyz="-7.3338E-10"
+        izz="0.011038" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.01"
+      rpy="1.5708 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="L1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
+  </joint>
+  <link
+    name="L2">
+    <inertial>
+      <origin
+        xyz="2.5758E-09 -2.0066E-08 -0.17282"
+        rpy="0 0 0" />
+      <mass
+        value="3.6365" />
+      <inertia
+        ixx="0.077736"
+        ixy="-1.0778E-10"
+        ixz="-4.0562E-10"
+        iyy="0.078819"
+        iyz="1.4721E-08"
+        izz="0.0059647" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J2"
+    type="revolute">
+    <origin
+      xyz="0 0.13062 0"
+      rpy="1.5708 -1.5708 0" />
+    <parent
+      link="L1" />
+    <child
+      link="L2" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
+  </joint>
+  <link
+    name="L3">
+    <inertial>
+      <origin
+        xyz="0.01 7.4465E-08 -0.11079"
+        rpy="0 0 0" />
+      <mass
+        value="2.2512" />
+      <inertia
+        ixx="0.019258"
+        ixy="-2.3005E-09"
+        ixz="4.644E-09"
+        iyy="0.020386"
+        iyz="1.9429E-09"
+        izz="0.0030744" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J3"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.425"
+      rpy="0 0 -3.1416" />
+    <parent
+      link="L2" />
+    <child
+      link="L3" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
+  </joint>
+  <link
+    name="L4">
+    <inertial>
+      <origin
+        xyz="-0.01 5.9649E-08 -0.0081105"
+        rpy="0 0 0" />
+      <mass
+        value="0.22465" />
+      <inertia
+        ixx="0.00012689"
+        ixy="-1.3381E-10"
+        ixz="-6.8739E-12"
+        iyy="0.00017646"
+        iyz="7.2481E-11"
+        izz="0.00013362" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J4"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.3"
+      rpy="0 0 3.1416" />
+    <parent
+      link="L3" />
+    <child
+      link="L4" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
+  </joint>
+  <link
+    name="L5">
+    <inertial>
+      <origin
+        xyz="1.2143E-17 -4.5869E-16 -0.058396"
+        rpy="0 0 0" />
+      <mass
+        value="0.16928" />
+      <inertia
+        ixx="0.00020457"
+        ixy="8.4957E-21"
+        ixz="1.5658E-20"
+        iyy="0.00020457"
+        iyz="3.1565E-21"
+        izz="0.00010248" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://polisher/meshes/L5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J5"
+    type="revolute">
+    <origin
+      xyz="-0.01 0 -0.045"
+      rpy="0 0 -3.1416" />
+    <parent
+      link="L4" />
+    <child
+      link="L5" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.141"
+      upper="3.141"
+      effort="5"
+      velocity="1" />
+  </joint>
+</robot>
