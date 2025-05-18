@@ -276,4 +276,21 @@
       effort="5"
       velocity="1" />
   </joint>
+  <!-- Vacuum gripper for scara -->
+  <link name="vacuum_gripper_scara">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.02"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="vacuum_gripper_scara_joint" type="fixed">
+    <parent link="L4"/>
+    <child link="vacuum_gripper_scara"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </joint>
 </robot>

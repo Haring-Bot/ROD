@@ -1,0 +1,14 @@
+<sdf version="1.6">
+  <world name="default">
+    <!-- Add the link attacher plugin -->
+    <plugin name="gazebo_ros_link_attacher" filename="libgazebo_ros_link_attacher.so"/>
+    <!-- Add ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <!-- Add sun (lighting) -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+  </world>
+</sdf>

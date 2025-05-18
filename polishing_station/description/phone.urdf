@@ -1,0 +1,24 @@
+<robot name="phone">
+  <link name="phone_link">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://polishing_station/objects/meshes/phone.stl" scale="1 1 1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://polishing_station/objects/meshes/phone.stl" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+  <gazebo reference="phone_link">
+    <gravity>0</gravity>
+  </gazebo>
+</robot>

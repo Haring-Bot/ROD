@@ -138,7 +138,8 @@ if __name__ == "__main__":
     #h.getPoseAndPrint()
     #p.getPoseAndPrint()
     #s.setTarget(0.631649, 0.31028, 0.983296,   -1.5707,-3.364,1.1061) #home scara
-    s.setTarget(0.310, 0.212, 0.930,   -1.571,-2.504,-1.576) #pickup scara
+    
+    
     #h.setTarget(1.1, 0.6, 0.7,   1.57,0,-1.57) #pickup handler
     #p.setTarget(0.6, 0.6, 1.2,   -3.6, 0 ,-1.57) #pickup handler
     s.move()

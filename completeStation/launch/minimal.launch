@@ -3,9 +3,14 @@
     <param name="robot_description" textfile="$(find polishing_station)/description/machine_robots.urdf"/>
     <param name="robot_description_semantic" textfile="$(find completeStation)/config/station_robots.srdf" />
     <param name="use_sim_time" value="true"/>
-    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+    <param name="gazebo_ros_link_attacher_plugin" value="$(find gazebo_ros_link_attacher)/lib/libgazebo_ros_link_attacher.so"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find completeStation)/worlds/my_world.world"/>
+    </include>
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robot"/>
  
+    <node name="spawn_phone" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -file $(find polishing_station)/description/phone.urdf -model phone -x 0.3 -y 0.1 -z 0.69" />
+
     <rosparam file="$(find completeStation)/config/trajectory_controller.yaml" command="load"/>    
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="scara_trajectory_controller handler_trajectory_controller polisher_trajectory_controller "/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>

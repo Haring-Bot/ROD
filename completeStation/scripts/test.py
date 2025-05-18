@@ -136,6 +136,50 @@ class robot:
             self.move_group.clear_pose_targets()
             self.goals = []
 
+    def attach_object(self, object_model, object_link, gripper_link):
+        """
+        Attach an object in Gazebo to the robot's gripper using the gazebo_ros_link_attacher plugin.
+        Example: self.attach_object('object', 'link', 'vacuum_gripper_handler')
+        """
+        try:
+            rospy.wait_for_service('/link_attacher_node/attach', timeout=2.0)
+            from gazebo_ros_link_attacher.srv import Attach, AttachRequest
+            attach_srv = rospy.ServiceProxy('/link_attacher_node/attach', Attach)
+            req = AttachRequest()
+            req.model_name_1 = rospy.get_namespace().strip('/') or 'robot'  # or set your robot model name
+            req.link_name_1 = gripper_link
+            req.model_name_2 = object_model
+            req.link_name_2 = object_link
+            resp = attach_srv.call(req)
+            if resp.ok:
+                print(f"[INFO] Successfully attached {object_model}:{object_link} to {gripper_link}")
+            else:
+                print(f"[ERROR] Failed to attach {object_model}:{object_link} to {gripper_link}")
+        except Exception as e:
+            print(f"[ERROR] Attach service call failed: {e}")
+
+    def detach_object(self, object_model, object_link, gripper_link):
+        """
+        Detach an object in Gazebo from the robot's gripper using the gazebo_ros_link_attacher plugin.
+        Example: self.detach_object('object', 'link', 'vacuum_gripper_handler')
+        """
+        try:
+            rospy.wait_for_service('/link_attacher_node/detach', timeout=2.0)
+            from gazebo_ros_link_attacher.srv import Attach, AttachRequest
+            detach_srv = rospy.ServiceProxy('/link_attacher_node/detach', Attach)
+            req = AttachRequest()
+            req.model_name_1 = rospy.get_namespace().strip('/') or 'robot'  # or set your robot model name
+            req.link_name_1 = gripper_link
+            req.model_name_2 = object_model
+            req.link_name_2 = object_link
+            resp = detach_srv.call(req)
+            if resp.ok:
+                print(f"[INFO] Successfully detached {object_model}:{object_link} from {gripper_link}")
+            else:
+                print(f"[ERROR] Failed to detach {object_model}:{object_link} from {gripper_link}")
+        except Exception as e:
+            print(f"[ERROR] Detach service call failed: {e}")
+
 def printWorkspaceSize():
     min_corner = rospy.get_param("/move_group/workspace_parameters/min_corner", None)
     max_corner = rospy.get_param("/move_group/workspace_parameters/max_corner", None)
@@ -199,6 +243,8 @@ if __name__ == "__main__":
     movetoHome(s,h,p)
     time.sleep(0.5)
     movetoPickup(s, h, p)
+    time.sleep(0.5)
+    s.attach_object("phone", "phone_link", "vacuum_gripper_scara")
     time.sleep(0.5)
     movetoSwitch(s, h, p)
     time.sleep(0.5)

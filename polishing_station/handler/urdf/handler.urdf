@@ -410,4 +410,21 @@
       damping="1"
       friction="1" />
   </joint>
+  <!-- Vacuum gripper for handler -->
+  <link name="vacuum_gripper_handler">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.05" radius="0.02"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="vacuum_gripper_handler_joint" type="fixed">
+    <parent link="L6"/>
+    <child link="vacuum_gripper_handler"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </joint>
 </robot>
