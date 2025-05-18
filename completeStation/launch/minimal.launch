@@ -8,7 +8,6 @@
  
     <rosparam file="$(find completeStation)/config/trajectory_controller.yaml" command="load"/>    
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="scara_trajectory_controller handler_trajectory_controller polisher_trajectory_controller "/>
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
     <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="static_base_link" args="0 0 0 0 0 0 world base_link" /> -->
  

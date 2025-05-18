@@ -10,10 +10,10 @@ scara_trajectory_controller:
     - scara_J3
     - scara_J4
   gains:
-    scara_J1: {p: 10, d: 1, i: 1}
-    scara_J2: {p: 10, d: 1, i: 1}
-    scara_J3: {p: 10, d: 1, i: 1}
-    scara_J4: {p: 10, d: 1, i: 1}
+    scara_J1: {p: 50, d: 5, i: 0}
+    scara_J2: {p: 50, d: 5, i: 0}
+    scara_J3: {p: 50, d: 5, i: 0}
+    scara_J4: {p: 50, d: 5, i: 0}
   constraints:
     goal_time: 0.6
     stopped_velocity_tolerance: 0.05
@@ -35,12 +35,12 @@ handler_trajectory_controller:
     - handler_J5
     - handler_J6
   gains:
-    handler_J1: {p: 10, d: 1, i: 1}
-    handler_J2: {p: 10, d: 1, i: 1}
-    handler_J3: {p: 10, d: 1, i: 1}
-    handler_J4: {p: 10, d: 1, i: 1}
-    handler_J5: {p: 10, d: 1, i: 1}
-    handler_J6: {p: 10, d: 1, i: 1}
+    handler_J1: {p: 50, d: 5, i: 0}
+    handler_J2: {p: 50, d: 5, i: 0}
+    handler_J3: {p: 50, d: 5, i: 0}
+    handler_J4: {p: 50, d: 5, i: 0}
+    handler_J5: {p: 50, d: 5, i: 0}
+    handler_J6: {p: 50, d: 5, i: 0}
   constraints:
     goal_time: 0.6
     stopped_velocity_tolerance: 0.05
@@ -63,11 +63,11 @@ polisher_trajectory_controller:
     - polisher_J4
     - polisher_J5
   gains:
-    polisher_J1: {p: 10, d: 1, i: 1}
-    polisher_J2: {p: 10, d: 1, i: 1}
-    polisher_J3: {p: 10, d: 1, i: 1}
-    polisher_J4: {p: 10, d: 1, i: 1}
-    polisher_J5: {p: 10, d: 1, i: 1}
+    polisher_J1: {p: 50, d: 5, i: 0}
+    polisher_J2: {p: 50, d: 5, i: 0}
+    polisher_J3: {p: 50, d: 5, i: 0}
+    polisher_J4: {p: 50, d: 5, i: 0}
+    polisher_J5: {p: 50, d: 5, i: 0}
   constraints:
     goal_time: 0.6
     stopped_velocity_tolerance: 0.05

@@ -38,6 +38,9 @@ planner_configs:
   RRTConnect:
     type: geometric::RRTConnect
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
+    workspace_parameters:
+      min_corner: [0.0, 0.0, 0.0]
+      max_corner: [1.0, 1.0, 2.0]
   RRTstar:
     type: geometric::RRTstar
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
