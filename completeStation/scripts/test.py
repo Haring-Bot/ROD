@@ -10,6 +10,7 @@ import math
 import time
 import tf.transformations as tf_trans
 import pdb
+import argparse
 from gazebo_ros_link_attacher.srv import Attach, AttachRequest, AttachResponse
 
 class robot:
@@ -120,12 +121,12 @@ class robot:
             for g in self.goals:
                 success = self.move_group.set_pose_target(g)
                 if not success:
-                    print("⚠️  IK could not find a solution for the target pose.")
+                    print("IK could not find a solution for the target pose.")
                     continue
 
                 result = self.move_group.go(wait=True)
                 if not result:
-                    print("⚠️  MoveIt could not execute the trajectory.")
+                    print("MoveIt could not execute the trajectory.")
                     continue  # Added continue to fix indentation error
 
                 self.move_group.go(wait=True)
@@ -221,40 +222,57 @@ def movetoPolish(scara, handler, polisher):
     handler.move_group.go(wait=True)
 
 if __name__ == "__main__":
+    param = sys.argv[1]
+    
     h = robot(nodename="pythonController",groupname="handler_planner")
     p = robot(nodename="pythonController",groupname="polisher_planner")
     s = robot(nodename="pythonController",groupname="scara_planner")
 
     printWorkspaceSize()
 
-    #s.setTarget(x=0.600, y=0.471, z=0.930, roll=-1.570, pitch=7.346, yaw=-1.570)#home
-    #s.setTarget(x=0.307, y=0.188, z=0.933, roll=-1.57, pitch=1.371, yaw=-1.570)#pickup
-    #s.moveL(offsetX=-0.293, offsetY=-0.283, offsetZ=0.003)
+    if param == 3:
+        print("!   Reset, moving all robots to home position...   !")
+        movetoHome(s,h,p)
+        sys.exit()
     
-    #s.getPoseAndPrint()
-    h.getPoseAndPrint()
+    else:
 
-    movetoHome(s,h,p)
-    time.sleep(0.5)
-    movetoPickup(s, h, p)
-    time.sleep(0.5)
-    s.attach_object("robot", "scara_L4", "phone", "phone_link")
-    time.sleep(0.5)
-    #pdb.set_trace() 
-    movetoSwitch(s, h, p)
-    time.sleep(1.0)
-    s.detach_object("robot", "scara_L4", "phone", "phone_link")
-    time.sleep(0.5)
-    s.attach_object("robot", "handler_L6", "phone", "phone_link")
-    time.sleep(0.5)
-    movetoPolish(s, h, p)
-    time.sleep(0.5)
-    movetoSwitch(s, h, p)
-    s.detach_object("robot", "handler_L6", "phone", "phone_link")
-    time.sleep(1.0)  # Add a pause to let physics stabilize
-    s.attach_object("robot", "scara_L4", "phone", "phone_link")
-    movetoPickup(s, h, p)
-    s.detach_object("robot", "scara_L4", "phone", "phone_link")
+        #s.setTarget(x=0.600, y=0.471, z=0.930, roll=-1.570, pitch=7.346, yaw=-1.570)#home
+        #s.setTarget(x=0.307, y=0.188, z=0.933, roll=-1.57, pitch=1.371, yaw=-1.570)#pickup
+        #s.moveL(offsetX=-0.293, offsetY=-0.283, offsetZ=0.003)
+        
+        #s.getPoseAndPrint()
+        h.getPoseAndPrint()
+
+        movetoHome(s,h,p)
+        time.sleep(0.5)
+        movetoPickup(s, h, p)
+        time.sleep(0.5)
+        s.attach_object("robot", "scara_L4", "phone", "phone_link")
+        time.sleep(0.5)
+        #pdb.set_trace() 
+        movetoSwitch(s, h, p)
+        time.sleep(1.0)
+        s.detach_object("robot", "scara_L4", "phone", "phone_link")
+        time.sleep(0.5)
+        s.attach_object("robot", "handler_L6", "phone", "phone_link")
+        time.sleep(0.5)
+        movetoPolish(s, h, p)
+
+        if param == 1:
+            print("simple polishing routine started...")
+            #simple routine WIP
+        elif param == 2:
+            print("advanced polishing routine started...")
+            #advanced routine WIP
+
+        time.sleep(0.5)
+        movetoSwitch(s, h, p)
+        s.detach_object("robot", "handler_L6", "phone", "phone_link")
+        time.sleep(1.0)  # Add a pause to let physics stabilize
+        s.attach_object("robot", "scara_L4", "phone", "phone_link")
+        movetoPickup(s, h, p)
+        s.detach_object("robot", "scara_L4", "phone", "phone_link")
 
     del h, p, s
 

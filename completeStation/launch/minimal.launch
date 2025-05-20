@@ -20,4 +20,7 @@
     <include file="$(find completeStation)/launch/moveit_rviz.launch" >
         <arg name="rviz_config" value="$(find completeStation)/config/robot.rviz"/>
     </include>
+
+    <!-- Launch the menu.py script -->
+    <node name="robot_control_menu" pkg="completeStation" type="menu.py" output="screen" />
  </launch>
