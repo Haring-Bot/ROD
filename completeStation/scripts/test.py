@@ -10,6 +10,7 @@ import math
 import time
 import tf.transformations as tf_trans
 import pdb
+from gazebo_ros_link_attacher.srv import Attach, AttachRequest, AttachResponse
 
 class robot:
     def __init__(self,nodename="standardPythonController",groupname="standardRobot"):
@@ -18,8 +19,8 @@ class robot:
         self.robot = moveit_commander.MoveGroupCommander(groupname)
         self.move_group = moveit_commander.MoveGroupCommander(groupname)
 
-        self.move_group.set_max_acceleration_scaling_factor(0.2)
-        self.move_group.set_max_velocity_scaling_factor(0.2)
+        self.move_group.set_max_acceleration_scaling_factor(0.5)
+        self.move_group.set_max_velocity_scaling_factor(0.5)
 
         self.move_group.set_planning_time(10.0)
         self.move_group.allow_replanning(True)
@@ -136,27 +137,20 @@ class robot:
             self.move_group.clear_pose_targets()
             self.goals = []
 
-    def attach_object(self, object_model, object_link, gripper_link):
-        """
-        Attach an object in Gazebo to the robot's gripper using the gazebo_ros_link_attacher plugin.
-        Example: self.attach_object('object', 'link', 'vacuum_gripper_handler')
-        """
+    def attach_object(self, robotName, robotLinkName, objectName, objectLinkName):
+        attach_srv = rospy.ServiceProxy('/link_attacher_node/attach', Attach)
+        
+        req = AttachRequest()
+        req.model_name_1 = robotName
+        req.link_name_1 = robotLinkName
+        req.model_name_2 = objectName
+        req.link_name_2 = objectLinkName
+
         try:
-            rospy.wait_for_service('/link_attacher_node/attach', timeout=2.0)
-            from gazebo_ros_link_attacher.srv import Attach, AttachRequest
-            attach_srv = rospy.ServiceProxy('/link_attacher_node/attach', Attach)
-            req = AttachRequest()
-            req.model_name_1 = rospy.get_namespace().strip('/') or 'robot'  # or set your robot model name
-            req.link_name_1 = gripper_link
-            req.model_name_2 = object_model
-            req.link_name_2 = object_link
             resp = attach_srv.call(req)
-            if resp.ok:
-                print(f"[INFO] Successfully attached {object_model}:{object_link} to {gripper_link}")
-            else:
-                print(f"[ERROR] Failed to attach {object_model}:{object_link} to {gripper_link}")
-        except Exception as e:
-            print(f"[ERROR] Attach service call failed: {e}")
+            print("Attached:", resp.ok)
+        except rospy.ServiceException as exc:
+            print("Service call failed:", exc)
 
     def detach_object(self, object_model, object_link, gripper_link):
         """
@@ -244,7 +238,10 @@ if __name__ == "__main__":
     time.sleep(0.5)
     movetoPickup(s, h, p)
     time.sleep(0.5)
-    s.attach_object("phone", "phone_link", "vacuum_gripper_scara")
+    # Call attach_object with correct parameters
+    # In Gazebo, links are prefixed with the model name, so we use "robot::vacuum_gripper_scara"
+    # Parameters: (robotName, robotLinkName, objectName, objectLinkName)
+    s.attach_object("robot", "scara_L4", "phone", "phone_link")
     time.sleep(0.5)
     movetoSwitch(s, h, p)
     time.sleep(0.5)
