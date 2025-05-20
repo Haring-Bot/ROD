@@ -32,7 +32,7 @@ def run_home_position():
 #main window
 root = tk.Tk()
 root.title("ROD Robot Control Panel")
-root.geometry("600x450")
+root.geometry("600x600")
 root.configure(bg="#f0f0f0")
 
 
@@ -74,14 +74,14 @@ simple_service_description = """
 Einfacher Service:
 - kurze Polierung
 - grobes reinigen des Bildschirms
-                $ 
+- $ 
 """
 
 advanced_service_description = """
 Advanced service mode:
 - aufwändige Poliserung
 - vollständige Bildschirmreinigung
-             $$
+- $$
 """
 
 run_home_description = """
