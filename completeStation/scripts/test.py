@@ -152,27 +152,20 @@ class robot:
         except rospy.ServiceException as exc:
             print("Service call failed:", exc)
 
-    def detach_object(self, object_model, object_link, gripper_link):
-        """
-        Detach an object in Gazebo from the robot's gripper using the gazebo_ros_link_attacher plugin.
-        Example: self.detach_object('object', 'link', 'vacuum_gripper_handler')
-        """
+    def detach_object(self, robotName, robotLinkName, objectName, objectLinkName):
+        detach_srv = rospy.ServiceProxy('/link_attacher_node/detach', Attach)
+        
+        req = AttachRequest()
+        req.model_name_1 = robotName
+        req.link_name_1 = robotLinkName
+        req.model_name_2 = objectName
+        req.link_name_2 = objectLinkName
+
         try:
-            rospy.wait_for_service('/link_attacher_node/detach', timeout=2.0)
-            from gazebo_ros_link_attacher.srv import Attach, AttachRequest
-            detach_srv = rospy.ServiceProxy('/link_attacher_node/detach', Attach)
-            req = AttachRequest()
-            req.model_name_1 = rospy.get_namespace().strip('/') or 'robot'  # or set your robot model name
-            req.link_name_1 = gripper_link
-            req.model_name_2 = object_model
-            req.link_name_2 = object_link
             resp = detach_srv.call(req)
-            if resp.ok:
-                print(f"[INFO] Successfully detached {object_model}:{object_link} from {gripper_link}")
-            else:
-                print(f"[ERROR] Failed to detach {object_model}:{object_link} from {gripper_link}")
-        except Exception as e:
-            print(f"[ERROR] Detach service call failed: {e}")
+            print("Detached:", resp.ok)
+        except rospy.ServiceException as exc:
+            print("Service call failed:", exc)
 
 def printWorkspaceSize():
     min_corner = rospy.get_param("/move_group/workspace_parameters/min_corner", None)
@@ -196,8 +189,15 @@ def movetoHome(scara, handler, polisher):
 def movetoPickup(scara, handler, polisher):
     print("moving robots to pickup position")
     scara.move_group.set_start_state_to_current_state()
-    scara.move_group.set_named_target("pickup")
+    scara.move_group.set_named_target("pickupUP")
     scara.move_group.go(wait=True)
+    scara.move_group.set_max_acceleration_scaling_factor(0.03)
+    scara.move_group.set_max_velocity_scaling_factor(0.03)
+    scara.move_group.set_start_state_to_current_state()
+    scara.move_group.set_named_target("pickupDOWN")
+    scara.move_group.go(wait=True)
+    scara.move_group.set_max_acceleration_scaling_factor(0.5)
+    scara.move_group.set_max_velocity_scaling_factor(0.5)
 
 def movetoSwitch(scara, handler, polisher):
     print("moving robots to switch position")
@@ -213,7 +213,7 @@ def movetoPolish(scara, handler, polisher):
     scara.move_group.set_start_state_to_current_state()
     polisher.move_group.set_start_state_to_current_state()
     handler.move_group.set_start_state_to_current_state()
-    scara.move_group.set_named_target("home")
+    scara.move_group.set_named_target("pickupUP")
     polisher.move_group.set_named_target("standby")
     handler.move_group.set_named_target("polish")
     scara.move_group.go(wait=True)
@@ -238,16 +238,23 @@ if __name__ == "__main__":
     time.sleep(0.5)
     movetoPickup(s, h, p)
     time.sleep(0.5)
-    # Call attach_object with correct parameters
-    # In Gazebo, links are prefixed with the model name, so we use "robot::vacuum_gripper_scara"
-    # Parameters: (robotName, robotLinkName, objectName, objectLinkName)
     s.attach_object("robot", "scara_L4", "phone", "phone_link")
     time.sleep(0.5)
+    #pdb.set_trace() 
     movetoSwitch(s, h, p)
+    time.sleep(1.0)
+    s.detach_object("robot", "scara_L4", "phone", "phone_link")
+    time.sleep(0.5)
+    s.attach_object("robot", "handler_L6", "phone", "phone_link")
     time.sleep(0.5)
     movetoPolish(s, h, p)
     time.sleep(0.5)
-    #movetoSwitch(s, h, p)
+    movetoSwitch(s, h, p)
+    s.detach_object("robot", "handler_L6", "phone", "phone_link")
+    time.sleep(1.0)  # Add a pause to let physics stabilize
+    s.attach_object("robot", "scara_L4", "phone", "phone_link")
+    movetoPickup(s, h, p)
+    s.detach_object("robot", "scara_L4", "phone", "phone_link")
 
     del h, p, s
 

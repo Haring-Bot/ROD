@@ -51,18 +51,6 @@
         <joint name="polisher_J5"/>
         <chain base_link="polisher_base_link" tip_link="polisher_L5"/>
     </group>
-    <!-- End Effector: Handler Vacuum Gripper -->
-    <end_effector name="handler_vacuum_gripper" parent_link="handler_L6" group="handler_vacuum_gripper" />
-    <!-- End Effector: SCARA Vacuum Gripper -->
-    <end_effector name="scara_vacuum_gripper" parent_link="scara_L4" group="scara_vacuum_gripper" />
-
-    <!-- End Effector Groups -->
-    <group name="handler_vacuum_gripper">
-        <link name="vacuum_gripper_handler"/>
-    </group>
-    <group name="scara_vacuum_gripper">
-        <link name="vacuum_gripper_scara"/>
-    </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="home" group="scara_planner">
         <joint name="scara_J1" value="0"/>
@@ -70,11 +58,17 @@
         <joint name="scara_J3" value="0"/>
         <joint name="scara_J4" value="0"/>
     </group_state>
-    <group_state name="pickup" group="scara_planner">
-        <joint name="scara_J1" value="1.6450909799949143"/>
-        <joint name="scara_J2" value="0.3410313709662862"/>
-        <joint name="scara_J3" value="-2.7799251288486815"/>
-        <joint name="scara_J4" value="-0.0009727507209355227"/>
+    <group_state name="pickupUP" group="scara_planner">
+        <joint name="scara_J1" value="1.6349726449719961"/>
+        <joint name="scara_J2" value="0.3350554306660989"/>
+        <joint name="scara_J3" value="-2.770659363262335"/>
+        <joint name="scara_J4" value="-0.08427549238239912"/>
+    </group_state>
+    <group_state name="pickupDOWN" group="scara_planner">
+        <joint name="scara_J1" value="1.6356311218915174"/>
+        <joint name="scara_J2" value="0.3342336334109701"/>
+        <joint name="scara_J3" value="-2.7702413586338404"/>
+        <joint name="scara_J4" value="-0.0042511807090365936"/>
     </group_state>
     <group_state name="switch" group="scara_planner">
         <joint name="scara_J1" value="-2.1292936403915697"/>
@@ -91,12 +85,12 @@
         <joint name="handler_J6" value="0"/>
     </group_state>
     <group_state name="switch" group="handler_planner">
-        <joint name="handler_J1" value="0.022138899980713056"/>
-        <joint name="handler_J2" value="-1.7695804339096455"/>
-        <joint name="handler_J3" value="1.1772885286263444"/>
-        <joint name="handler_J4" value="-2.5368387984166416"/>
-        <joint name="handler_J5" value="-3.1189973718892485"/>
-        <joint name="handler_J6" value="-1.5733323107832922"/>
+        <joint name="handler_J1" value="0.029869540179853438"/>
+        <joint name="handler_J2" value="-1.6205833686121043"/>
+        <joint name="handler_J3" value="0.981128626068899"/>
+        <joint name="handler_J4" value="-2.4912264668127975"/>
+        <joint name="handler_J5" value="-3.1151284890748316"/>
+        <joint name="handler_J6" value="-1.5823245050708525"/>
     </group_state>
     <group_state name="polish" group="handler_planner">
         <joint name="handler_J1" value="1.9774824528296673"/>
@@ -114,11 +108,11 @@
         <joint name="polisher_J5" value="0"/>
     </group_state>
     <group_state name="standby" group="polisher_planner">
-        <joint name="polisher_J1" value="-0.00369779553026639"/>
-        <joint name="polisher_J2" value="0.7449732871794241"/>
-        <joint name="polisher_J3" value="2.0566331520659027"/>
-        <joint name="polisher_J4" value="1.2896109147345722"/>
-        <joint name="polisher_J5" value="-0.009532219347859083"/>
+        <joint name="polisher_J1" value="-0.002501484938100873"/>
+        <joint name="polisher_J2" value="-0.777797234685532"/>
+        <joint name="polisher_J3" value="-2.342718929618302"/>
+        <joint name="polisher_J4" value="-1.562448454778437"/>
+        <joint name="polisher_J5" value="-0.010239097157457522"/>
     </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="handler_L1" link2="handler_L2" reason="Adjacent"/>
@@ -188,7 +182,6 @@
     <disable_collisions link1="handler_L5" link2="scara_L3" reason="Never"/>
     <disable_collisions link1="handler_L5" link2="scara_L4" reason="Never"/>
     <disable_collisions link1="handler_L5" link2="scara_base_link" reason="Never"/>
-    <disable_collisions link1="handler_L6" link2="vacuum_gripper_handler" reason="Adjacent"/>
     <disable_collisions link1="handler_L6" link2="polisher_L1" reason="Never"/>
     <disable_collisions link1="handler_L6" link2="polisher_L2" reason="Never"/>
     <disable_collisions link1="handler_L6" link2="polisher_L3" reason="Never"/>
@@ -261,6 +254,5 @@
     <disable_collisions link1="scara_L2" link2="scara_base_link" reason="Never"/>
     <disable_collisions link1="scara_L3" link2="scara_L4" reason="Adjacent"/>
     <disable_collisions link1="scara_L3" link2="scara_base_link" reason="Never"/>
-    <disable_collisions link1="scara_L4" link2="vacuum_gripper_scara" reason="Adjacent"/>
     <disable_collisions link1="scara_base_link" link2="static_frame" reason="Adjacent"/>
 </robot>
